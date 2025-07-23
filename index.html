@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign SAW's Requisition for an SGM </title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Quicksand', Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            background: #fff;
+        }
+        .container {
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px 32px 32px 32px;
+            max-width: 440px;
+            margin: 56px auto;
+            box-shadow: 0 0 0 8px #fff, 0 0 0 12px #e0e0e0;
+            border: 4px solid transparent;
+            border-image: linear-gradient(90deg, #ff4040 0%, #27ae60 100%);
+            border-image-slice: 1;
+            position: relative;
+        }
+        h2 {
+            text-align: center;
+            color: #ff4040;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 2.1em;
+            letter-spacing: 1px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #183a1d;
+            font-size: 1.13em;
+            font-weight: 700;
+            margin-bottom: 22px;
+            margin-top: 0;
+            letter-spacing: 0.1px;
+        }
+        .emoji-header {
+            text-align: center;
+            font-size: 2.7em;
+            margin-bottom: 8px;
+            animation: float 2.5s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0);}
+            50% { transform: translateY(-10px);}
+        }
+        .user-message {
+            background: linear-gradient(90deg, #ff4040 0%, #27ae60 100%);
+            color: #fff;
+            border-radius: 10px;
+            padding: 10px 16px;
+            font-size: 0.98em;
+            font-weight: 500;
+            margin-bottom: 24px;
+            text-align: left;
+            letter-spacing: 0.1px;
+            line-height: 1.6;
+            box-shadow: 0 1px 8px #e0e0e0;
+        }
+        label {
+            display: block;
+            margin-top: 18px;
+            font-weight: 700;
+            color: #183a1d;
+            letter-spacing: .2px;
+        }
+        input, textarea, select, button {
+            width: 100%;
+            margin-top: 6px;
+            padding: 12px 14px;
+            border-radius: 8px;
+            border: 2.5px solid #183a1d;
+            font-size: 1em;
+            font-family: inherit;
+            box-sizing: border-box;
+            background: #fff;
+            color: #183a1d;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+            font-weight: 600;
+        }
+        input:focus, textarea:focus, select:focus {
+            border-color: #ff4040;
+            outline: none;
+            background: #f7f7f7;
+            box-shadow: 0 0 8px #ff404022;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+        button {
+            margin-top: 24px;
+            background: linear-gradient(90deg, #ff4040 0%, #27ae60 100%);
+            color: #fff;
+            border: none;
+            font-size: 1.16em;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 2px 14px #e5e5e580;
+            letter-spacing: 1px;
+            border-radius: 12px;
+        }
+        button:hover, button:focus {
+            background: linear-gradient(90deg, #27ae60 0%, #ff4040 100%);
+        }
+        .output {
+            margin-top: 36px;
+            background: #fff;
+            padding: 20px 14px;
+            border-radius: 16px;
+            font-size: 1.12em;
+            color: #183a1d;
+            border: 3px solid transparent;
+            border-image: linear-gradient(90deg, #ff4040 0%, #27ae60 100%);
+            border-image-slice: 1;
+            font-family: 'Quicksand', monospace, Arial;
+            box-shadow: 0 3px 16px #e0e0e0;
+            white-space: pre-wrap;
+        }
+        .output:empty {
+            display: none;
+        }
+        .footer-text {
+            text-align: center;
+            margin-top: 34px;
+            color: #27ae60;
+            font-size: 1em;
+            opacity: 0.9;
+            letter-spacing: .2px;
+            font-weight: bold;
+        }
+        .send-btn {
+            width: 100%;
+            margin-top: 14px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: linear-gradient(90deg, #27ae60 0%, #ff4040 100%);
+            color: #fff;
+            border: none;
+            font-size: 1.12em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            display: none;
+        }
+        .send-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        select {
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="red" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position-x: 98%;
+            background-position-y: 15px;
+            padding-right: 32px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="emoji-header">🇵🇸📝</div>
+        <h2>Sign SAW's Requisiton for an SGM</h2>
+        <div class="subtitle">SANCTION ISRAEL NOT STUDENTS: CUT TIES WITH GENOCIDE, STOP REPRESSION OF PALESTINE PROTEST; SUPPPORT FREEDOM FOR PALESTINE FROM THE RIVER TO THE SEA</div>
+        <div class="user-message">
+            The University of Melbourne (Unimelb) is complicit in <b>genocide.</b><br>
+            <br>
+            The University of Melbourne (Unimelb) is complicit in genocide. The United Nations special rapporteur on the situation of human rights in the occupied Palestinian territory released a report in July detailing companies complicit in the genocide. It highlights Lockheed Martin and the indispensable role of their F-35 fighter jets for Israel’s airforce which have decimated Gaza. In 2023, Unimelb had received $3.5 million from Lockheed Martin. Unimelb provides research to Lockheed Martin, at the defence manufacturer’s “Advanced Systems & Technologies”  (formally STELaRLab) located next to the Parkville campus at Melbourne Connect. Lockheed Martin describes it as its “first and most advanced multidisciplinary R&D facility located outside the United States.” This is one of Unimelb’s many partnerships with weapons manufacturers directly involved in Israel’s genocide, including Boeing, Raytheon, BAE systems, Rafael and many others.<br>
+            <br>
+            Unimelb runs a joint-PhD program with the Hebrew University of Jerusalem, Israel (HUJI). HUJI’s main campus is built on illegally occupied Palestinian land in East Jerusalem, which required the eviction of Palestinians and the bulldozing of their homes to build its facilities. It directly assists in the genocidal activities of the Israeli Defence Force (IDF) through its on-campus military base that helps train Israeli soldiers and officers. Through its joint-PhD program, Unimelb PhD students can contribute to research used to bolster the IDF’s genocidal activities, such as medical students who can contribute to HUJI’s ‘Institute for Research in Military Medicine’, a partnership between their medical school and the IDF Medical Corps designed to help alleviate the “ever increasing burden on the IDF Medical Corps for response to hostilities on multiple fronts”, as their website states. <br>
+            <br>
+            The Palestine movement at Unimelb has brought these crimes to the attention of thousands of staff and students, particularly through the Gaza Solidarity Encampment and sit-in of Mahmoud’s Hall (Arts West) last year. But instead of cutting their ties to the genocide, Unimelb has waged an unprecedented attack on the right to protest for Palestine. Last semester, Unimelb introduced new protest rules that prohibit any protests from being held inside buildings or near any building entrances, and a new wifi policy designed to track Palestine activists. They have expelled two students and suspended two others involved in a sit-in protesting the university’s joint PhD program with HUJI.<br>
+            <br>
+            Their justification is that the movement is antisemitic. Unimelb currently employs the IHRA definition of antisemitism, which equates opposing the state of Israel with antisemitism. Similarly, Universities Australia, representing all 39 universities in Australia, adopted a new definition of antisemitism to be specifically used on our campuses. This definition claims that “criticism of Israel can be antisemitic… when it calls for the elimination of the State of Israel.” Under both of these definitions, any attempt to criticise Zionism or oppose Israel can be construed as antisemitic and grounds for academic misconduct. Amnesty International condemned the definition as a “direct attack on fundamental freedoms, stifling freedom of speech, expression, assembly, academic debate, and protest”.<br>
+            <br>
+            We must reject these attempts to repress the Palestine movement. Instead of attacking students, Unimelb must cut its ties with genocide<br>
+        
+        </div>
+        <form id="emailForm" autocomplete="off">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" required placeholder="As your name appears on your SID">
+
+            <label for="email">Your Email</label>
+            <input type="email" id="email" required placeholder="freepalestine@unimelb.edu.au">
+
+            <label for="studentid">Your Student ID</label>
+            <input type="text" id="studentid" required placeholder="e.g. 1234567">
+
+            <label for="faculty">Your Faculty</label>
+            <input type="text" id="faculty" required placeholder="e.g. Arts, Law, Medicine">
+
+            <label for="role">I am a...</label>
+            <select id="role" required>
+                <option value="">Select your role</option>
+                <option value="an undergraduate student">🧑‍🎓 an undergraduate student</option>
+                <option value="a postgraduate">🧑‍🏫 a postgraduate</option>
+            </select>
+
+            <label for="prewritten">Pick an email!</label>
+            <select id="prewritten">
+                <option value="">Select a message</option>
+                <option value="I join the growing body of students that demand that a Special General Meeting (SGM) be called to vote on the following resolutions:
+
+
+1. This SGM demands Unimelb end its complicity in the genocidal onslaught on Gaza. We demand that Unimelb end its research partnership with Lockheed Martin, and all weapons manufacturers who supply Israel’s genocide. These weapons companies have profited from selling weapons to the Israeli Occupation Forces while it commits war crimes against Palestinians. We also demand the Unimelb cuts ties with the apartheid Hebrew University of Jerusalem, which directly supports Israel’s genocide through its training of IDF soldiers and officers.
+
+
+
+2. This SGM demands Unimelb end the repression of pro-Palestine protest, and rescind both the IHRA definition of antisemitism and the Universities Australia (UA) definition adopted by all public Australian universities in February. These definitions threaten to silence opposition on campus to apartheid Israel and its blatant war crimes. There is nothing antisemitic about calling for the end of an apartheid state that is committing genocide. We demand that Unimelb rescind the 3 March 2025 Vice-Chancellor Rules (indoor protest ban) and 16 May 2024 Vice-Chancellor Rules which are designed to punish students for peaceful and legitimate protest. Unimelb must rescind the suspensions and expulsions of the 4 students for their legitimate protest against the apartheid Hebrew University of Jerusalem.
+
+
+
+3. This SGM recognises the right to armed resistance Palestinians have under international law as an occupied people. The violence in Palestine and Israel is a result of the Israeli state, its occupation of Palestine, and the apartheid system inflicted on Palestinians. This SGM endorses the call for a single, secular, democratic state across all of historic Palestine, from the River Jordan to the Mediterranean Sea. This would be a single state where people of all faiths and backgrounds live in freedom and equality. It is not antisemitic to call for the elimination of the apartheid state of Israel and its replacement with a genuinely democratic state for all people. ">
+                    Email one: Direct and firm
+                </option>
+                <option value=" I hope this email finds you well. I am writing to you to advocate for a Special General Meeting (SGM) to be called to vote on the following resolutions: 
+
+
+1. This SGM demands Unimelb end the repression of pro-Palestine protest, and rescind both the IHRA definition of antisemitism and the Universities Australia (UA) definition adopted by all public Australian universities in February. These definitions threaten to silence opposition on campus to apartheid Israel and its blatant war crimes. There is nothing antisemitic about calling for the end of an apartheid state that is committing genocide. We demand that Unimelb rescind the 3 March 2025 Vice-Chancellor Rules (indoor protest ban) and 16 May 2024 Vice-Chancellor Rules which are designed to punish students for peaceful and legitimate protest. Unimelb must rescind the suspensions and expulsions of the 4 students for their legitimate protest against the apartheid Hebrew University of Jerusalem.
+
+2. This SGM recognises the right to armed resistance Palestinians have under international law as an occupied people. The violence in Palestine and Israel is a result of the Israeli state, its occupation of Palestine, and the apartheid system inflicted on Palestinians. 
+
+3. This SGM endorses the call for a single, secular, democratic state across all of historic Palestine, from the River Jordan to the Mediterranean Sea. This would be a single state where people of all faiths and backgrounds live in freedom and equality. It is not antisemitic to call for the elimination of the apartheid state of Israel and its replacement with a genuinely democratic state for all people. 
+Thank you for your attention on this matter.">
+               
+                    Email two: Extra polite
+                </option>
+                <option value="I am one of the students requesting that a Special General Meeting (SGM) be called to vote on the following resolutions:
+
+                    1. This SGM demands Unimelb end the repression of pro-Palestine protest, and rescind both the IHRA definition of antisemitism and the Universities Australia (UA) definition adopted by all public Australian universities in February. These definitions threaten to silence opposition on campus to apartheid Israel and its blatant war crimes. There is nothing antisemitic about calling for the end of an apartheid state that is committing genocide. We demand that Unimelb rescind the 3 March 2025 Vice-Chancellor Rules (indoor protest ban) and 16 May 2024 Vice-Chancellor Rules which are designed to punish students for peaceful and legitimate protest. Unimelb must rescind the suspensions and expulsions of the 4 students for their legitimate protest against the apartheid Hebrew University of Jerusalem.
+
+2. This SGM recognises the right to armed resistance Palestinians have under international law as an occupied people. The violence in Palestine and Israel is a result of the Israeli state, its occupation of Palestine, and the apartheid system inflicted on Palestinians. 
+
+3. This SGM endorses the call for a single, secular, democratic state across all of historic Palestine, from the River Jordan to the Mediterranean Sea. This would be a single state where people of all faiths and backgrounds live in freedom and equality. It is not antisemitic to call for the elimination of the apartheid state of Israel and its replacement with a genuinely democratic state for all people. 
+Thank you for your attention on this matter.   ">
+                    Email three: Neutral
+                </option>
+                <option value="Custom">Custom message...</option>
+            </select>
+
+            <label for="message">Your Message</label>
+            <textarea id="message" rows="5" placeholder="Type your message here..."></textarea>
+
+            <label style="margin-top: 20px;display:block;">
+                <input type="checkbox" id="sendEmail" style="width:auto; margin-right:8px;">
+                Actually send this email (opens your email app)
+            </label>
+
+            <button type="submit">✉️ Generate Email ✉️</button>
+        </form>
+        <div class="output" id="output"></div>
+    </div>
+    <div class="footer-text">
+        Thank you for your solidarity
+    </div>
+    <script>
+        const form = document.getElementById('emailForm');
+        const output = document.getElementById('output');
+        const prewritten = document.getElementById('prewritten');
+        const message = document.getElementById('message');
+        const role = document.getElementById('role');
+        const studentid = document.getElementById('studentid');
+        const faculty = document.getElementById('faculty');
+        const sendEmail = document.getElementById('sendEmail');
+
+        // Dynamically require or remove 'required' attribute for message textarea
+        prewritten.addEventListener('change', function() {
+            if (prewritten.value === "Custom") {
+                message.required = true;
+                message.value = "";
+                message.focus();
+            } else if (prewritten.value === "" || prewritten.value === null) {
+                message.required = false;
+                message.value = "";
+                message.focus();
+            } else {
+                message.required = false;
+                message.value = prewritten.value;
+            }
+        });
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const studentID = studentid.value.trim();
+            const userFaculty = faculty.value.trim();
+            const userRole = role.value;
+
+            const predeterminedRecipient = "secretary@union.unimelb.edu.au";
+            const roleText = userRole ? userRole : "";
+            const idLine = studentID ? `Student ID: ${studentID}\n` : "";
+            const facultyLine = userFaculty ? `Faculty: ${userFaculty}\n` : "";
+
+            // Use the message if custom, else use the prewritten value (if not blank or custom)
+            let msg = "";
+            if (prewritten.value === "Custom") {
+                msg = message.value.trim();
+            } else if (prewritten.value && prewritten.value !== "Custom") {
+                msg = prewritten.value.trim();
+            }
+
+            const emailSubject = `New Message from ${name}`;
+            const emailBody = `To the General Secretary of the University of Melbourne Student Union,
+
+My name is ${name}, and I'm ${roleText} in the ${facultyLine.replace('\n', '')} faculty at the University of Melbourne. (${email})
+
+${msg}
+
+Best regards,
+${name}${idLine ? ', ' + idLine.trim() : ""}`;
+
+            const emailTemplate = `To: ${predeterminedRecipient}
+From: ${name} <${email}>
+Subject: ${emailSubject}
+
+${emailBody}`;
+
+            output.textContent = emailTemplate;
+            output.style.display = 'block';
+
+            // If user wants to send, open mailto link
+            if (sendEmail.checked) {
+                // Encode subject and body for mailto
+                const mailtoSubject = encodeURIComponent(emailSubject);
+                const mailtoBody = encodeURIComponent(emailBody);
+                // Open user's email client
+                window.location.href = `mailto:${predeterminedRecipient}?subject=${mailtoSubject}&body=${mailtoBody}`;
+            }
+        });
+    </script>
+</body>
+</html>
