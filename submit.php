@@ -11,6 +11,7 @@ if ($_POST['opt_in'] !== 'true') {
 $data = [
     'name' => htmlspecialchars($_POST['name'] ?? ''),
     'email' => filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL),
+    'phone' => preg_replace('/[^0-9]/', '', $_POST['phone'] ?? ''), // Sanitize phone number
     'studentid' => htmlspecialchars($_POST['studentid'] ?? ''),
     'faculty' => htmlspecialchars($_POST['faculty'] ?? ''),
     'role' => htmlspecialchars($_POST['role'] ?? ''),
