@@ -284,52 +284,78 @@ Thank you for your attention on this matter.   ">
             }
         });
 
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
+            
+            // Collect all form values
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
             const studentID = studentid.value.trim();
             const userFaculty = faculty.value.trim();
             const userRole = role.value;
-
             const predeterminedRecipient = "secretary@union.unimelb.edu.au";
-            const roleText = userRole ? userRole : "";
-            const idLine = studentID ? `Student ID: ${studentID}\n` : "";
-            const facultyLine = userFaculty ? `Faculty: ${userFaculty}\n` : "";
-
-        
+            
+            // Get message content
             let msg = "";
             if (prewritten.value === "Custom") {
                 msg = message.value.trim();
             } else if (prewritten.value && prewritten.value !== "Custom") {
                 msg = prewritten.value.trim();
             }
-
+        
+            // ===== 1. FIRST SAVE TO PHP BACKEND =====
+            try {
+                const formData = new FormData();
+                formData.append('name', name);
+                formData.append('email', email);
+                formData.append('studentid', studentID);
+                formData.append('faculty', userFaculty);
+                formData.append('role', userRole);
+                formData.append('prewritten', prewritten.value);
+                formData.append('message', msg);
+        
+                const response = await fetch('submit.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to save submission');
+                }
+                
+            } catch (error) {
+                console.error('Storage error:', error);
+                // Continue anyway - don't block user if storage fails
+            }
+        
+            // ===== 2. THEN PROCEED WITH EXISTING EMAIL GENERATION =====
+            const roleText = userRole ? userRole : "";
+            const idLine = studentID ? `Student ID: ${studentID}\n` : "";
+            const facultyLine = userFaculty ? `Faculty: ${userFaculty}\n` : "";
+        
             const emailSubject = `New Message from ${name}`;
             const emailBody = `To the General Secretary of the University of Melbourne Student Union,
-
+        
 My name is ${name}, and I'm ${roleText} in the ${facultyLine.replace('\n', '')} at the University of Melbourne. (${email})
 
 ${msg}
 
 Best regards,
 ${name}${idLine ? ', ' + idLine.trim() : ""}`;
-
+        
             const emailTemplate = `To: ${predeterminedRecipient}
 From: ${name} <${email}>
 Subject: ${emailSubject}
 
 ${emailBody}`;
-
+        
             output.textContent = emailTemplate;
             output.style.display = 'block';
-
-            // If user wants to send, open mailto link
+        
+            // Open email client if checkbox is checked
             if (sendEmail.checked) {
-                // Encode subject and body for mailto
                 const mailtoSubject = encodeURIComponent(emailSubject);
                 const mailtoBody = encodeURIComponent(emailBody);
-                // Open user's email client
                 window.location.href = `mailto:${predeterminedRecipient}?subject=${mailtoSubject}&body=${mailtoBody}`;
             }
         });
