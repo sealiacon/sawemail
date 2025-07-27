@@ -1,42 +1,38 @@
 <?php
-// Set headers for JSON response
 header('Content-Type: application/json');
 
-// Collect all form data
+// Only proceed if this is an opt-in request
+if ($_POST['opt_in'] !== 'true') {
+    echo json_encode(['success' => false, 'error' => 'Not an opt-in request']);
+    exit;
+}
+
+// Prepare data
 $data = [
-    'name' => $_POST['name'] ?? '',
-    'email' => $_POST['email'] ?? '',
-    'studentid' => $_POST['studentid'] ?? '',
-    'faculty' => $_POST['faculty'] ?? '',
-    'role' => $_POST['role'] ?? '',
-    'prewritten' => $_POST['prewritten'] ?? '',
-    'message' => $_POST['message'] ?? '',
-    'timestamp' => date('Y-m-d H:i:s'),
+    'name' => htmlspecialchars($_POST['name'] ?? ''),
+    'email' => filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL),
+    'studentid' => htmlspecialchars($_POST['studentid'] ?? ''),
+    'faculty' => htmlspecialchars($_POST['faculty'] ?? ''),
+    'role' => htmlspecialchars($_POST['role'] ?? ''),
+    'message' => htmlspecialchars($_POST['message'] ?? ''),
+    'opt_in_date' => date('Y-m-d H:i:s'),
     'ip' => $_SERVER['REMOTE_ADDR']
 ];
 
 // Validate required fields
-if (empty($data['name']) || empty($data['email']) || empty($data['studentid'])) {
+if (empty($data['name']) || empty($data['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
     http_response_code(400);
-    echo json_encode(['error' => 'Required fields missing']);
+    echo json_encode(['success' => false, 'error' => 'Invalid data']);
     exit;
 }
 
-// Create submissions directory if it doesn't exist
+// Save to file (create directory if needed)
 if (!file_exists('submissions')) {
     mkdir('submissions', 0755, true);
 }
 
-// Save to JSON file (one file per submission)
-$filename = 'submissions/submission_' . time() . '_' . bin2hex(random_bytes(4)) . '.json';
-file_put_contents($filename, json_encode($data, JSON_PRETTY_PRINT));
+$filename = 'submissions/optin_' . date('Y-m-d') . '.json';
+file_put_contents($filename, json_encode($data, JSON_PRETTY_PRINT) . "\n", FILE_APPEND);
 
-// Alternatively, append to a single file (simpler but less organized)
-// file_put_contents('submissions/all_submissions.json', json_encode($data)."\n", FILE_APPEND);
-
-// Return success response
-echo json_encode([
-    'success' => true,
-    'message' => 'Submission saved successfully'
-]);
+echo json_encode(['success' => true]);
 ?>
