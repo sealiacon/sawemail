@@ -401,6 +401,7 @@ ${emailBody}`;
         document.getElementById('stayInTouchBtn').addEventListener('click', async function() {
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim(); // New phone field
             const studentID = studentid.value.trim();
             const userFaculty = faculty.value.trim();
             const userRole = role.value;
@@ -409,6 +410,7 @@ ${emailBody}`;
                 const formData = new FormData();
                 formData.append('name', name);
                 formData.append('email', email);
+                formData.append('phone', phone);
                 formData.append('studentid', studentID);
                 formData.append('faculty', userFaculty);
                 formData.append('role', userRole);
