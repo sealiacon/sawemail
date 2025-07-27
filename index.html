@@ -309,17 +309,17 @@ Thank you for your attention on this matter.   ">
             }
         });
 
-        form.addEventListener('submit', async function(e) {
+        form.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Collect all form values
+            // Collect form values
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
             const studentID = studentid.value.trim();
             const userFaculty = faculty.value.trim();
             const userRole = role.value;
             const predeterminedRecipient = "secretary@union.unimelb.edu.au";
-            
+        
             // Get message content
             let msg = "";
             if (prewritten.value === "Custom") {
@@ -328,32 +328,7 @@ Thank you for your attention on this matter.   ">
                 msg = prewritten.value.trim();
             }
         
-            // ===== 1. FIRST SAVE TO PHP BACKEND =====
-            try {
-                const formData = new FormData();
-                formData.append('name', name);
-                formData.append('email', email);
-                formData.append('studentid', studentID);
-                formData.append('faculty', userFaculty);
-                formData.append('role', userRole);
-                formData.append('prewritten', prewritten.value);
-                formData.append('message', msg);
-        
-                const response = await fetch('submit.php', {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                if (!response.ok) {
-                    throw new Error('Failed to save submission');
-                }
-                
-            } catch (error) {
-                console.error('Storage error:', error);
-                // Continue anyway - don't block user if storage fails
-            }
-        
-            // ===== 2. THEN PROCEED WITH EXISTING EMAIL GENERATION =====
+            // Generate email content
             const roleText = userRole ? userRole : "";
             const idLine = studentID ? `Student ID: ${studentID}\n` : "";
             const facultyLine = userFaculty ? `Faculty: ${userFaculty}\n` : "";
@@ -374,8 +349,12 @@ Subject: ${emailSubject}
 
 ${emailBody}`;
         
+            // Display generated email
             output.textContent = emailTemplate;
             output.style.display = 'block';
+        
+            // Show the "Stay in touch" button
+            document.getElementById('stayInTouchBtn').style.display = 'block';
         
             // Open email client if checkbox is checked
             if (sendEmail.checked) {
