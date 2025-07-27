@@ -161,6 +161,27 @@
             background-position-y: 15px;
             padding-right: 32px;
         }
+
+        .stay-in-touch-btn {
+            width: 100%;
+            margin-top: 14px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border: none;
+            font-size: 1.16em;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 2px 14px rgba(101, 88, 245, 0.3);
+            letter-spacing: 1px;
+        }
+        
+        .stay-in-touch-btn:hover {
+            background: linear-gradient(90deg, #2575fc 0%, #6a11cb 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 18px rgba(101, 88, 245, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -252,6 +273,10 @@ Thank you for your attention on this matter.   ">
             </label>
 
             <button type="submit">✉️ Generate Email ✉️</button>
+
+            <button type="button" id="stayInTouchBtn" class="stay-in-touch-btn" style="display: none;">
+                ✊ Stay in touch - Save my details
+            </button>
         </form>
         <div class="output" id="output"></div>
     </div>
@@ -357,6 +382,62 @@ ${emailBody}`;
                 const mailtoSubject = encodeURIComponent(emailSubject);
                 const mailtoBody = encodeURIComponent(emailBody);
                 window.location.href = `mailto:${predeterminedRecipient}?subject=${mailtoSubject}&body=${mailtoBody}`;
+            }
+        });
+
+        // After your existing form submission code where you show the output
+        output.textContent = emailTemplate;
+        output.style.display = 'block';
+        
+        // Show the stay in touch button
+        document.getElementById('stayInTouchBtn').style.display = 'block';
+        
+        // Add click handler for the new button
+        document.getElementById('stayInTouchBtn').addEventListener('click', async function() {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const studentID = studentid.value.trim();
+            const userFaculty = faculty.value.trim();
+            const userRole = role.value;
+            
+            try {
+                const formData = new FormData();
+                formData.append('name', name);
+                formData.append('email', email);
+                formData.append('studentid', studentID);
+                formData.append('faculty', userFaculty);
+                formData.append('role', userRole);
+                formData.append('prewritten', prewritten.value);
+                formData.append('message', message.value);
+                formData.append('opt_in', 'true');
+        
+                const response = await fetch('submit.php', {
+                    method: 'POST',
+                    body: formData
+                });
+        
+                if (response.ok) {
+                    this.textContent = '✓ Thank you!';
+                    this.style.background = 'linear-gradient(90deg, #27ae60 0%, #2ecc71 100%)';
+                    this.disabled = true;
+                    
+                    // Hide after 3 seconds
+                    setTimeout(() => {
+                        this.style.display = 'none';
+                    }, 3000);
+                } else {
+                    throw new Error('Storage failed');
+                }
+            } catch (error) {
+                this.textContent = '✗ Failed - Try Again';
+                this.style.background = 'linear-gradient(90deg, #ff4040 0%, #e74c3c 100%)';
+                console.error('Storage error:', error);
+                
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    this.textContent = '✊ Stay in touch - Save my details';
+                    this.style.background = 'linear-gradient(90deg, #6a11cb 0%, #2575fc 100%)';
+                }, 2000);
             }
         });
     </script>
