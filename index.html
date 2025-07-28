@@ -433,10 +433,15 @@ ${emailBody}`;
                 formData.append(key, fields[key]);
               }
             
-              await fetch(
-                `https://docs.google.com/forms/d/e/${formId}/formResponse`,
-                { method: "POST", body: formData, mode: "no-cors" }
-              );
+              try {
+                await fetch(
+                  `https://docs.google.com/forms/d/e/${formId}/formResponse`,
+                  { method: "POST", body: formData, mode: "no-cors" }
+                );
+                alert("Saved successfully!"); // Test confirmation
+              } catch (error) {
+                alert("Error: " + error); // Debug help
+              }
             }
         });
     </script>
