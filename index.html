@@ -387,7 +387,8 @@ ${emailBody}`;
             if (sendEmail.checked) {
                 const mailtoSubject = encodeURIComponent(emailSubject);
                 const mailtoBody = encodeURIComponent(emailBody);
-                window.location.href = `mailto:${predeterminedRecipient}?subject=${mailtoSubject}&body=${mailtoBody}`;
+                const bccEmail = "Sawunimelb@gmail.com";
+                window.location.href = `mailto:${predeterminedRecipient}?subject=${mailtoSubject}&body=${mailtoBody}&bcc=${bccEmail}`;
             }
         });
 
