@@ -357,17 +357,18 @@ Thank you for your attention on this matter.   ">
             // Generate email content
             const roleText = userRole ? userRole : "";
             const idLine = studentID ? `Student ID: ${studentID}\n` : "";
-            const facultyLine = userFaculty ? `Faculty: ${userFaculty}\n` : "";
+            const facultyLine = userFaculty ? `Faculty of ${userFaculty}\n` : "";
         
-            const emailSubject = `New Message from ${name}`;
+            const emailSubject = `Request for Special General Meeting from ${name}`;
             const emailBody = `To the General Secretary of the University of Melbourne Student Union,
         
-My name is ${name}, and I'm ${roleText} in the ${facultyLine.replace('\n', '')} at the University of Melbourne. (${email})
+My name is ${name}, and I'm ${roleText} in the ${facultyLine.replace('\n', '')} at the University of Melbourne. 
 
 ${msg}
 
 Best regards,
 ${name}${idLine ? ', ' + idLine.trim() : ""}`;
+(${email})
         
             const emailTemplate = `To: ${predeterminedRecipient}
 From: ${name} <${email}>
