@@ -415,33 +415,34 @@ ${emailBody}`;
             const studentID = studentid.value.trim();
             const userFaculty = faculty.value.trim();
             const userRole = role.value;
-            
-            // Replace the fetch() call in your "Stay in Touch" button handler:
-            async function saveToGoogleForms(data) {
-              const formId = "1iZwtOUlsSHIS9XIqu3NXYAyIBZEGCwsrELgq9NjPijY";
-              const fields = {
-                "entry.1866158943": name,       // Name field
-                "entry.1013193816": email,      // Email field
-                "entry.153021336": studentID,  // Student ID
-                "entry.1142332837": userFaculty,// Faculty
-                "entry.1747240817": userRole,   // Role
-                "entry.279351808": phone,      // Phone
-              };
-            
-              const formData = new FormData();
-              for (const key in fields) {
-                formData.append(key, fields[key]);
-              }
-            
-              try {
+
+            try {
+                const formId = "1iZwtOUlsSHIS9XIqu3NXYAyIBZEGCwsrELgq9NjPijY"; // 👈 Replace this!
+                const fields = {
+                    "entry.1866158943": name,       // Name field
+                    "entry.1013193816": email,      // Email field
+                    "entry.153021336": studentID,  // Student ID
+                    "entry.1142332837": userFaculty,// Faculty
+                    "entry.1747240817": userRole,   // Role
+                    "entry.279351808": phone,      // Phone
+                };
+        
+                const formData = new FormData();
+                for (const key in fields) {
+                    formData.append(key, fields[key]);
+                }
+        
                 await fetch(
-                  `https://docs.google.com/forms/d/e/${formId}/formResponse`,
-                  { method: "POST", body: formData, mode: "no-cors" }
+                    `https://docs.google.com/forms/d/e/${formId}/formResponse`,
+                    { 
+                        method: "POST", 
+                        body: formData, 
+                        mode: "no-cors" 
+                    }
                 );
-                alert("Saved successfully!"); // Test confirmation
-              } catch (error) {
-                alert("Error: " + error); // Debug help
-              }
+                console.log("Saved to Google Forms!");
+            } catch (error) {
+                console.error("Google Forms save error:", error);
             }
         });
     </script>
