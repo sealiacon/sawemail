@@ -416,45 +416,27 @@ ${emailBody}`;
             const userFaculty = faculty.value.trim();
             const userRole = role.value;
             
-            try {
-                const formData = new FormData();
-                formData.append('name', name);
-                formData.append('email', email);
-                formData.append('phone', phone);
-                formData.append('studentid', studentID);
-                formData.append('faculty', userFaculty);
-                formData.append('role', userRole);
-                formData.append('prewritten', prewritten.value);
-                formData.append('message', message.value);
-                formData.append('opt_in', 'true');
-        
-                const response = await fetch('submit.php', {
-                    method: 'POST',
-                    body: formData
-                });
-        
-                if (response.ok) {
-                    this.textContent = '✓ Thank you!';
-                    this.style.background = 'linear-gradient(90deg, #27ae60 0%, #2ecc71 100%)';
-                    this.disabled = true;
-                    
-                    // Hide after 3 seconds
-                    setTimeout(() => {
-                        this.style.display = 'none';
-                    }, 3000);
-                } else {
-                    throw new Error('Storage failed');
-                }
-            } catch (error) {
-                this.textContent = '✗ Failed - Try Again';
-                this.style.background = 'linear-gradient(90deg, #ff4040 0%, #e74c3c 100%)';
-                console.error('Storage error:', error);
-                
-                // Reset after 2 seconds
-                setTimeout(() => {
-                    this.textContent = '✊ Stay in touch - Save my details';
-                    this.style.background = 'linear-gradient(90deg, #6a11cb 0%, #2575fc 100%)';
-                }, 2000);
+            // Replace the fetch() call in your "Stay in Touch" button handler:
+            async function saveToGoogleForms(data) {
+              const formId = "1iZwtOUlsSHIS9XIqu3NXYAyIBZEGCwsrELgq9NjPijY";
+              const fields = {
+                "entry.1866158943": name,       // Name field
+                "entry.1013193816": email,      // Email field
+                "entry.153021336": studentID,  // Student ID
+                "entry.1142332837": userFaculty,// Faculty
+                "entry.1747240817": userRole,   // Role
+                "entry.279351808": phone,      // Phone
+              };
+            
+              const formData = new FormData();
+              for (const key in fields) {
+                formData.append(key, fields[key]);
+              }
+            
+              await fetch(
+                `https://docs.google.com/forms/d/e/${formId}/formResponse`,
+                { method: "POST", body: formData, mode: "no-cors" }
+              );
             }
         });
     </script>
