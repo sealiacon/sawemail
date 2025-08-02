@@ -298,12 +298,12 @@ Thank you for your attention on this matter. ">
             <label for="message">Your Message</label>
             <textarea id="message" rows="5" placeholder="Type your message here..."></textarea>
 
-            <label style="margin-top: 20px;display:block;">
+<!--             <label style="margin-top: 20px;display:block;">
                 <input type="checkbox" id="sendEmail" style="width:auto; margin-right:8px;">
                 Actually send this email (opens your email app)
-            </label>
+            </label> -->
 
-            <button type="submit">✉️ Generate Email ✉️</button>
+            <button type="submit">✉️ Generate Email (opens your email app) ✉️</button>
 
             <label for="phone" style="margin-top: 18px;">Phone Number (optional)</label>
             <input type="tel" id="phone" placeholder="e.g. 0412345678" pattern="[0-9]{10}" style="margin-bottom: 10px;">
@@ -392,13 +392,10 @@ ${emailBody}`;
             // Show the "Stay in touch" button
             document.getElementById('stayInTouchBtn').style.display = 'block';
         
-            // Open email client if checkbox is checked
-            if (sendEmail.checked) {
-                const mailtoSubject = encodeURIComponent(emailSubject);
-                const mailtoBody = encodeURIComponent(emailBody);
-                const bccEmail = "Sawunimelb@gmail.com";
-                window.location.href = `mailto:${predeterminedRecipient}?subject=${mailtoSubject}&body=${mailtoBody}&bcc=${bccEmail}`;
-            }
+            const mailtoSubject = encodeURIComponent(emailSubject);
+            const mailtoBody = encodeURIComponent(emailBody);
+            const bccEmail = "Sawunimelb@gmail.com";
+            window.location.href = `mailto:${predeterminedRecipient}?subject=${mailtoSubject}&body=${mailtoBody}&bcc=${bccEmail}`;
         });
 
         // After your existing form submission code where you show the output
