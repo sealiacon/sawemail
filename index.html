@@ -312,13 +312,10 @@ Thank you for your attention on this matter. ">
                 Actually send this email (opens your email app)
             </label> -->
 
-            <button type="submit">✉️ Generate Email (opens your email app) ✉️</button>
-
-            <label for="phone" style="margin-top: 18px;">Phone Number (optional)</label>
-            <input type="tel" id="phone" placeholder="e.g. 0412345678" pattern="[0-9]{10}" style="margin-bottom: 10px;">
+            <button type="submit">✉️ Generate email (opens your email app) ✉️</button>
             
-            <button type="button" id="stayInTouchBtn" class="stay-in-touch-btn">
-                ✊ Stay in touch - Save my details
+            <button href="https://docs.google.com/forms/d/1uEWKLNLHvraLCfiF-LVG8Zkj9Hs1lR3xKBea8QGex34/prefill" type="button" id="stayInTouchBtn" class="stay-in-touch-btn">
+                Click to stay in touch ✊
             </button>
         
         </form>
@@ -414,44 +411,6 @@ ${emailBody}`;
         // Show the stay in touch button
         document.getElementById('stayInTouchBtn').style.display = 'block';
         
-        // Add click handler for the new button
-        document.getElementById('stayInTouchBtn').addEventListener('click', async function() {
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim(); // New phone field
-            const studentID = studentid.value.trim();
-            const userFaculty = faculty.value.trim();
-            const userRole = role.value;
-
-            try {
-                const formId = "1iZwtOUlsSHIS9XIqu3NXYAyIBZEGCwsrELgq9NjPijY"; // 👈 Replace this!
-                const fields = {
-                    "entry.1866158943": name,       // Name field
-                    "entry.1013193816": email,      // Email field
-                    "entry.153021336": studentID,  // Student ID
-                    "entry.1142332837": userFaculty,// Faculty
-                    "entry.1747240817": userRole,   // Role
-                    "entry.279351808": phone,      // Phone
-                };
-        
-                const formData = new FormData();
-                for (const key in fields) {
-                    formData.append(key, fields[key]);
-                }
-        
-                await fetch(
-                    `https://docs.google.com/forms/d/e/${formId}/formResponse`,
-                    { 
-                        method: "POST", 
-                        body: formData, 
-                        mode: "no-cors" 
-                    }
-                );
-                console.log("Saved to Google Forms!");
-            } catch (error) {
-                console.error("Google Forms save error:", error);
-            }
-        });
     </script>
 </body>
 </html>
