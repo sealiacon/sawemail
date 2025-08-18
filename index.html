@@ -320,12 +320,15 @@ To the General Secretary of the University of Melbourne Student Union (UMSU). We
             <label for="message">Your Message</label>
             <textarea id="message" rows="5" placeholder="Type your message here..."></textarea>
 
-            <!-- Trigger to open the email app -->
-            <button type="button" id="openEmailBtn" class="stay-in-touch-btn">✉️ Open email in your app</button>
+<!--             <label style="margin-top: 20px;display:block;">
+                <input type="checkbox" id="sendEmail" style="width:auto; margin-right:8px;">
+                Actually send this email (opens your email app)
+            </label>
+
+            <button type="submit">✉️ Generate email (opens your email app) ✉️</button> -->
             
-            <!-- Stay in touch -->
             <a href="https://docs.google.com/forms/d/e/1FAIpQLScTILRMGao1zu99Cz5KLY9m7SLnb8Q_05MSKhFjjHxPdpH9iA/viewform?usp=sharing&ouid=113377069870950813650" target="_blank">
-                <button type="button" id="stayInTouchBtn" class="stay-in-touch-btn" style="display:none;">
+                <button type="button" id="stayInTouchBtn" class="stay-in-touch-btn">
                     Click this to stay in touch ✊
                 </button>
             </a>
@@ -336,100 +339,93 @@ To the General Secretary of the University of Melbourne Student Union (UMSU). We
     <div class="footer-text">
         Thank you for your solidarity
     </div>
-
     <script>
-      const output = document.getElementById('output');
-      const prewritten = document.getElementById('prewritten');
-      const message = document.getElementById('message');
-      const role = document.getElementById('role');
-      const studentid = document.getElementById('studentid');
-      const faculty = document.getElementById('faculty');
-      const openEmailBtn = document.getElementById('openEmailBtn');
-      const form = document.getElementById('emailForm');
+        const form = document.getElementById('emailForm');
+        const output = document.getElementById('output');
+        const prewritten = document.getElementById('prewritten');
+        const message = document.getElementById('message');
+        const role = document.getElementById('role');
+        const studentid = document.getElementById('studentid');
+        const faculty = document.getElementById('faculty');
+        const sendEmail = document.getElementById('sendEmail');
 
-      // Keep the prewritten -> message behavior
-      prewritten.addEventListener('change', function () {
-        if (prewritten.value === "Custom") {
-          message.required = true;
-          message.value = "";
-          message.focus();
-        } else if (!prewritten.value) {
-          message.required = false;
-          message.value = "";
-          message.focus();
-        } else {
-          message.required = false;
-          message.value = prewritten.value;
-        }
-      });
+        // Dynamically require or remove 'required' attribute for message textarea
+        prewritten.addEventListener('change', function() {
+            if (prewritten.value === "Custom") {
+                message.required = true;
+                message.value = "";
+                message.focus();
+            } else if (prewritten.value === "" || prewritten.value === null) {
+                message.required = false;
+                message.value = "";
+                message.focus();
+            } else {
+                message.required = false;
+                message.value = prewritten.value;
+            }
+        });
 
-      function buildAndOpenEmail() {
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const studentID = studentid.value.trim();
-        const userFaculty = faculty.value.trim();
-        const userRole = role.value;
-        const predeterminedRecipient = "secretary@union.unimelb.edu.au";
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const studentID = studentid.value.trim();
+            const userFaculty = faculty.value.trim();
+            const userRole = role.value;
+            const predeterminedRecipient = "secretary@union.unimelb.edu.au";
+        
+            // Get message content
+            let msg = "";
+            if (prewritten.value === "Custom") {
+                msg = message.value.trim();
+            } else if (prewritten.value && prewritten.value !== "Custom") {
+                msg = prewritten.value.trim();
+            }
+        
+            // Generate email content
+            const roleText = userRole ? userRole : "";
+            const idLine = studentID ? `Student ID: ${studentID}\n` : "";
+            const facultyLine = userFaculty ? `Faculty: ${userFaculty}\n` : "";
+        
+            const emailSubject = `New Message from ${name}`;
+            const emailBody = `To the General Secretary of the University of Melbourne Student Union,
+        
+My name is ${name}, and I'm ${roleText} in the ${facultyLine.replace('\n', '')} at the University of Melbourne. (${email})
 
-        // choose message
-        let msg = "";
-        if (prewritten.value === "Custom") {
-          msg = message.value.trim();
-        } else if (prewritten.value && prewritten.value !== "Custom") {
-          msg = prewritten.value.trim();
-        }
-
-        const roleText = userRole ? userRole : "";
-        const idLine = studentID ? \`Student ID: \${studentID}\\n\` : "";
-        const facultyText = userFaculty ? userFaculty : "";
-
-        const emailSubject = \`New Message from \${name}\`;
-        const emailBody =
-\`To the General Secretary of the University of Melbourne Student Union,
-
-My name is \${name}, and I'm \${roleText}\${facultyText ? \` in the \${facultyText}\` : ""} at the University of Melbourne. (\${email})
-
-\${msg}
+${msg}
 
 Best regards,
-\${name}\${idLine ? '\\n' + idLine.trim() : ""}\`;
+${name}${idLine ? ', ' + idLine.trim() : ""}`;
 
-        // show a preview in the page
-        const emailTemplate =
-\`To: \${predeterminedRecipient}
-From: \${name} <\${email}>
-Subject: \${emailSubject}
+        
+            const emailTemplate = `To: ${predeterminedRecipient}
+From: ${name} <${email}>
+Subject: ${emailSubject}
 
-\${emailBody}\`;
+${emailBody}`;
+        
+            // Display generated email
+            output.textContent = emailTemplate;
+            output.style.display = 'block';
+        
+            // Show the "Stay in touch" button
+            document.getElementById('stayInTouchBtn').style.display = 'block';
+        
+            const mailtoSubject = encodeURIComponent(emailSubject);
+            const mailtoBody = encodeURIComponent(emailBody);
+            const bccEmail = "Sawunimelb@gmail.com";
+            window.location.href = `mailto:${predeterminedRecipient}?subject=${mailtoSubject}&body=${mailtoBody}&bcc=${bccEmail}`;
+        });
+
+        // After your existing form submission code where you show the output
         output.textContent = emailTemplate;
         output.style.display = 'block';
-
-        // open default email app
-        const mailtoSubject = encodeURIComponent(emailSubject);
-        const mailtoBody = encodeURIComponent(emailBody);
-        const bccEmail = "Sawunimelb@gmail.com";
-        window.location.href = \`mailto:\${predeterminedRecipient}?subject=\${mailtoSubject}&body=\${mailtoBody}&bcc=\${bccEmail}\`;
-
-        // reveal the stay-in-touch button
-        const stayBtn = document.getElementById('stayInTouchBtn');
-        if (stayBtn) stayBtn.style.display = 'block';
-      }
-
-      // Click handler for the new button
-      if (openEmailBtn) {
-        openEmailBtn.addEventListener('click', function (e) {
-          e.preventDefault();
-          buildAndOpenEmail();
-        });
-      }
-
-      // Optional: allow Enter key to trigger (prevents navigation)
-      if (form) {
-        form.addEventListener('submit', function (e) {
-          e.preventDefault();
-          buildAndOpenEmail();
-        });
-      }
+        
+        // Show the stay in touch button
+        document.getElementById('stayInTouchBtn').style.display = 'block';
+        
     </script>
 </body>
 </html>
